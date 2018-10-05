@@ -28,23 +28,32 @@
         var lossesText = document.getElementById("losses-text");
         var guesslText = document.getElementById("guessesleft-text");
         var guessfText = document.getElementById("guessessofar-text");
-        document.onkeyup = addEventlistener.onkeyup(event) {
+        document.onkeyup = function (event) {
             winsText.textContent = "wins: " + wins;
             lossesText.textContent = "losses: " + losses;
             guesslText.textContent = "Guesses left: " + guessesLeft;
 
             document.onkeyup = function (event) {
+                var userGuess = event.key;
+                var computerGuess = computerLetter[Math.floor(Math.random() * computerLetter.length)];
+                var userText = document.getElementById("user-text");
                 if (userGuess === computerGuess) {
                     wins++;
+                }
                 else if (userGuess !== computerGuess && guessesSoFar.indexOf(userGuess) === -1) {
-                        guessesSoFar.push(userGuess);
-                        var x = document.getElementById("guessessofar-text");
-                        x.innerHTML = guessesSoFar.join();
-                        userText.textContent = event.key;
-                        losses++;
-                    };
-                };
+                    guessesSoFar.push(userGuess);
+                    var x = document.getElementById("guessessofar-text");
+                    x.innerHTML = guessesSoFar.join();
+                    userText.textContent = event.key;
+                    losses++;
+                    guessesLeft--;
+                }
+                winsText.textContent = "wins: " + wins;
+                lossesText.textContent = "losses: " + losses;
+                guesslText.textContent = "Guesses left: " + guessesLeft;
+
             };
+        };
     </script>
 </body>
 
